@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fun facts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="/static/css/body_bg.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+	  <div class="container-fluid">
+		<a class="navbar-brand" href="#">Weatherometer</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		  <div class="navbar-nav">
+			<a class="nav-link" aria-current="page" href="./current-weather">Home</a>
+			<a class="nav-link" href="./daily-weather">5 Day Forecast</a>
+			<a class="nav-link active" href="./fun-facts">Fun Facts</a>
+		  	<a class="left_pad" href="{{ url_for('auth.logout')}}"><button class="btn btn-primary" type="button">Logout</button></a>
+		  </div>
+		</div>
+	  </div>
+	</nav>
+	<hr>
+	<hr>
+	<div class="container">
+	  <div class="row">
+		<div class="col-sm">
+		  <div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src="https://i.natgeofe.com/n/fb80fae8-d096-4f5a-98ab-ec43830aa023/20846.jpg?w=636&h=477" alt="Card image cap">
+			  <div class="card-body">
+				<h5 class="card-title">Lightning has about 6 million strikes every day</h5>
+				<p class="card-text">There are about 8.6 million strikes of lightning every day. The perfect place to see lightning strikes is Lake Maracaibo in Venezuela, where there is an 80% chance of experiencing a nocturnal thunderstorm.</p>
+			  </div>
+		  </div>
+		</div>
+		<div class="col-sm">
+		  <div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src="https://images.unsplash.com/photo-1598431429388-c561cb614d2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8d29ybXxlbnwwfHwwfHw%3D&w=1000&q=80" alt="Card image cap">
+			  <div class="card-body">
+				<h5 class="card-title">Worms prepare for a flood</h5>
+				<p class="card-text">Worms wriggle up to the surface of the earth before a flood. It is because they cannot get oxygen when the soil is flooded and as such, they come up to the surface to breathe.</p>
+			  </div>
+		  </div>
+		</div>
+		<div class="col-sm">
+		  <div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src="https://telugu.samayam.com/thumb/71434317/71434317.jpg?imgsize=188202&width=540&height=405&resizemode=75" alt="Card image cap">
+			  <div class="card-body">
+				<h5 class="card-title">“Raining blood” has been recorded:</h5>
+				<p class="card-text">Between July and September 2001, in Kerala, a southern Indian state, it rained blood. Well, it was not actual blood, but red rain. It was first thought to be because of a burst meteor, but a study concluded that the red rains were colored by airborne spores</p>
+			  </div>
+		  </div>
+		</div>
+	  </div>
+	  <hr>
+	  <hr>
+	  <div class="row">
+		<div class="col-sm">
+		  <div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src="https://api.time.com/wp-content/uploads/2017/09/hurricane-categories.jpg" alt="Card image cap">
+			  <div class="card-body">
+				<h5 class="card-title">Hurricane Irma is the longest-lasting hurricane or typhoon ever recorded</h5>
+				<p class="card-text">In September 2017, Hurricane Irma hit several Caribbean Island nations such as Cuba, the Bahamas and also the US state of Florida. It had winds of up to 185mph and lasted for 37 hours and is the longest maintained intensity for any cyclone.</p>
+			  </div>
+		  </div>
+		</div>
+		<div class="col-sm">
+		  <div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src="https://t3.ftcdn.net/jpg/05/69/83/72/360_F_569837224_MC8PGpdrMPQgMhWVUiovexKFNe2FPBCJ.jpg" alt="Card image cap">
+			  <div class="card-body">
+				<h5 class="card-title">Lightning is sexist!</h5>
+				<p class="card-text">Lightning seems to prefer to strike men over women with about 85% of its victims being men. Surprisingly, of those struck by lightning, the fatality rates are higher in women than men. Additionally, 90% of lightning strike victims survive</p>
+			  </div>
+		  </div>
+		</div>
+		<div class="col-sm">
+		  <div class="card" style="width: 18rem;">
+			  <img class="card-img-top" src="https://media.istockphoto.com/id/1185317534/photo/hand-catching-raindrops.jpg?s=170667a&w=0&k=20&c=g8_PttI8uwGIHOm5_VUDnygr9gqCV2YyPRneL5s_wyw=" alt="Card image cap">
+			  <div class="card-body">
+				<h5 class="card-title">Rain doesn’t look like a tear drop when it falls</h5>
+				<p class="card-text">Instead of picturing rain as a teardrop, it more resembles a hamburger bun when it’s falling. Rain starts with water collecting dust in a cloud. If the raindrop gets too large in size, it can tear apart into two different raindrops. It can also mesh with other raindrops and start the cycle again.</p>
+			  </div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
