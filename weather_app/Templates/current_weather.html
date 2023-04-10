@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Weather App using Flask in Python</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link href="/static/css/body_bg.css" rel="stylesheet" />
+<style>
+#map {
+  height: 300px;
+  width: 600px;
+}
+</style>
+<script>
+	function changeBg()
+	{
+		console.log("Hi");
+		const images = [
+			'url("/static/images/1.jpg")',
+			'url("/static/images/2.jpg")',
+			'url("/static/images/3.jpg")',
+			'url("/static/images/4.jpg")',
+			'url("/static/images/5.jpg")',
+		]
+
+		const section = document.querySelector("body");
+		const bg = images[Math.floor(Math.random() * images.length)];
+		console.log(bg);
+		document.body.style.backgroundImage = bg;
+		document.body.style.backgroundRepeat = "no-repeat";
+		document.body.style.backgroundSize = "cover";
+		document.body.style.backgroundBlendMode = "luminosity";
+	}
+	
+	setInterval(changeBg , 4000);
+</script>
+</head>
+<body onload="changeBg()">
+	<section>
+	<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+	  <div class="container-fluid">
+		<a class="navbar-brand" href="#">Weatherometer</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		  <div class="navbar-nav">
+			<a class="nav-link active" aria-current="page" href="./current-weather">Home</a>
+			<a class="nav-link" href="./daily-weather">5 Day Forecast</a>
+			<a class="nav-link" href="./fun-facts">Fun Facts</a>
+		  	<a class="left_pad" href="{{ url_for('auth.logout')}}"><button class="btn btn-primary" type="button">Logout</button></a>
+		  </div>
+		</div>
+	  </div>
+	</nav>
+	<div class="container">
+		<div  class="center">
+	    <br><br><br>
+		<div class="row"><h2>Let's find out the weather of your fav city</h2></div>
+		<br>
+		<div class="row">
+			<h6>Get weather details of any city around the world.</h6>
+		</div>
+		<hr>
+		<div class="row">
+			{% block content %}
+				<form action="{{ url_for('main.index')}}" method="post">
+				<div class="form-group">
+				<div>
+				<label for="cityName">City Name:</label>
+				<input type="text" id="cityName" name="cityName" value="{{cityName}}" placeholder="City Name">
+				</div>
+				<hr/>
+				<div>
+				<label for="tempUnit">Temperature Unit:</label>
+				<input type="text" id="tempUnit" name="tempUnit" value="{{tempUnit}}" placeholder="Celcius/Kelvin/Farheneit">
+				</div>
+				<hr>
+				<button class="submit">Find</button>
+				<hr>
+				</hr>
+				<div>
+				{% if error is defined and error %}
+					<br><br><span class="alert alert-danger">Error: Please enter valid city name.</span></br>
+				{% endif %}
+				</div>
+				</form>
+			{% endblock %}
+			{% if data is defined and data %}
+			{% set lat = data.coord.lat %}
+			{% set lon = data.coord.lon %}
+			
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Country Code</th>
+						<th>Coordinate</th>
+						<th>Temperature</th>
+						<th>Pressure</th>
+						<th>Humidity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="bg-success">{{ data.sys.country }}</td>
+						<td class="bg-info">{{data.coord.lon }} {{data.coord.lat}}</td>
+						<td class="bg-danger">{{data.main.temp }} </td>
+						<td class="bg-warning">{{data.main.pressure}}</td>
+						<td class="bg-primary">{{data.main.humidity}}</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+	</div>
+	
+	
+	<div style="padding: 20px 100px; padding-left: 270px;" class="container">
+		<div id="map"></div>
+	</div>
+	
+	</section>
+	{% set lat = data.coord.lat %}
+	{% set lon = data.coord.lon %}
+	
+	
+	<script type="text/javascript">
+		var map;
+		function iniMap() {	
+			//console.log(JSON.stringify(toString(a)));		
+			//console.log(JSON.stringify(obj));
+					
+			var latitude = parseFloat("{{lat}}"); // YOUR LATITUDE VALUE
+			var longitude = parseFloat("{{lon}}"); // YOUR LONGITUDE VALUE
+			
+			console.log(latitude);
+			console.log(longitude);
+
+			var myLatLng = {lat: latitude, lng: longitude};
+			
+			map = new google.maps.Map(document.getElementById('map'), {
+			center: myLatLng,
+			zoom: 14					
+			});
+					
+			var marker = new google.maps.Marker({
+			position: myLatLng,
+			map: map,
+			//title: 'Hello World'
+			
+			// setting latitude & longitude as title of the marker
+			// title is shown when you hover over the marker
+			title: latitude + ', ' + longitude 
+			});
+		}		
+		</script>
+		
+		<script src="https://maps.googleapis.com/maps/api/js?key=&callback=iniMap"
+		async defer></script>
+	{% endif %}
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
